@@ -8,7 +8,7 @@ console = Console()
 hospital = Hospital()
 
 def mostrar_menu():
-    console.print("\n[bold green]--- Menú ---[/bold green]")
+    console.print("\n[bold yellow]--- Menú ---[/bold yellow]")
     console.print("1. Agregar persona")
     console.print("2. Solicitar cita")
     console.print("3. Cancelar cita")
@@ -21,7 +21,7 @@ def mostrar_menu():
 
 while True:
     mostrar_menu()
-    opcion = console.input("[bold blue]Seleccione una opción: [/bold blue]")
+    opcion = console.input("[bold magenta]Seleccione una opción: [/bold magenta]")
 
     if opcion == "1":
         tipo_persona = console.input("Ingrese el tipo de persona ([cyan]médico[/cyan] o [cyan]paciente[/cyan]): ").lower()
@@ -54,8 +54,8 @@ while True:
                 console.print("Médicos disponibles:")
                 table = Table(title="Médicos Disponibles")
                 table.add_column("No.", justify="right")
-                table.add_column("Nombre", style="cyan")
-                table.add_column("Especialidad", style="magenta")
+                table.add_column("Nombre", style="bright_cyan")
+                table.add_column("Especialidad", style="bright_magenta")
 
                 for i, medico in enumerate(medicos_disponibles):
                     table.add_row(str(i + 1), medico.nombre, medico.especialidad)
@@ -83,8 +83,8 @@ while True:
                 console.print("[bold]Citas pendientes:[/bold]")
                 table = Table(title="Citas Pendientes")
                 table.add_column("No.", justify="right")
-                table.add_column("Fecha", style="cyan")
-                table.add_column("Médico", style="magenta")
+                table.add_column("Fecha", style="bright_cyan")
+                table.add_column("Médico", style="bright_magenta")
 
                 for i, cita in enumerate(citas_pendientes):
                     table.add_row(str(i + 1), cita.fecha, cita.medico.nombre)
@@ -110,6 +110,7 @@ while True:
 
         if paciente and medico:
             paciente.asignar_medico(medico)
+            console.print("[green]Médico de preferencia asignado exitosamente.[/green]")
         else:
             console.print("[red]Paciente o médico no encontrado.[/red]")
 
@@ -124,8 +125,8 @@ while True:
             if citas_pendientes:
                 table = Table(title="Citas Pendientes")
                 table.add_column("No.", justify="right")
-                table.add_column("Fecha", style="cyan")
-                table.add_column("Médico", style="magenta")
+                table.add_column("Fecha", style="bright_cyan")
+                table.add_column("Médico", style="bright_magenta")
 
                 for i, cita in enumerate(citas_pendientes):
                     table.add_row(str(i + 1), cita.fecha, cita.medico.nombre)
@@ -137,16 +138,16 @@ while True:
             console.print("[red]Paciente no encontrado.[/red]")
 
     elif opcion == "6":  # Buscar citas por fecha
-        fecha_busqueda = console.input("[bold bright_cyan]Ingrese la fecha para buscar citas (YYYY-MM-DD): [/bold bright_cyan]")
+        fecha_busqueda = console.input("[bold bright_yellow]Ingrese la fecha para buscar citas (YYYY-MM-DD): [/bold bright_yellow]")
         
         citas_encontradas = [cita for cita in hospital.citas if cita.fecha.startswith(fecha_busqueda)]
         
         if citas_encontradas:
             console.print(f"[bold]Citas programadas para el {fecha_busqueda}:[/bold]")
-            table = Table(title=f"[bold cyan]Citas del {fecha_busqueda}[/bold cyan]")
+            table = Table(title=f"[bold yellow]Citas del {fecha_busqueda}[/bold yellow]")
             table.add_column("No.", justify="right")
             table.add_column("Hora", style="bright_magenta")
-            table.add_column("Paciente", style="green")
+            table.add_column("Paciente", style="bright_green")
             table.add_column("Médico", style="bright_cyan")
             
             for i, cita in enumerate(citas_encontradas):
@@ -168,9 +169,9 @@ while True:
                 especialidades[especialidad] = 1
         
         console.print("[bold]Reporte de médicos por especialidad:[/bold]")
-        table = Table(title="[bold cyan]Médicos por Especialidad[/bold cyan]")
+        table = Table(title="[bold yellow]Médicos por Especialidad[/bold yellow]")
         table.add_column("Especialidad", style="bright_magenta")
-        table.add_column("Cantidad", justify="right", style="green")
+        table.add_column("Cantidad", justify="right", style="bright_green")
         
         for especialidad, cantidad in especialidades.items():
             table.add_row(especialidad, str(cantidad))
@@ -178,7 +179,7 @@ while True:
         console.print(table)
 
     elif opcion == "8":  # Ver historial de citas de un paciente
-        id_paciente = console.input("[bold bright_cyan]Ingrese la identificación del paciente: [/bold bright_cyan]")
+        id_paciente = console.input("[bold bright_yellow]Ingrese la identificación del paciente: [/bold bright_yellow]")
         paciente = hospital.encontrar_paciente(id_paciente)
         
         if paciente:
@@ -186,9 +187,9 @@ while True:
             
             if citas_historial:
                 console.print(f"[bold]Historial de citas del paciente {paciente.nombre}:[/bold]")
-                table = Table(title=f"[bold cyan]Historial de Citas de {paciente.nombre}[/bold cyan]")
+                table = Table(title=f"[bold yellow]Historial de Citas de {paciente.nombre}[/bold yellow]")
                 table.add_column("Fecha", style="bright_magenta")
-                table.add_column("Médico", style="green")
+                table.add_column("Médico", style="bright_green")
                 table.add_column("Estado", style="bright_yellow")
                 
                 for cita in citas_historial:
