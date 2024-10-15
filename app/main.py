@@ -7,7 +7,7 @@ console = Console()
 
 hospital = Hospital()
 
-ddef mostrar_menu():
+def mostrar_menu():
     console.print("\n[bold green]--- Menú ---[/bold green]")
     console.print("1. Agregar persona")
     console.print("2. Solicitar cita")
@@ -197,4 +197,11 @@ while True:
                 
                 console.print(table)
             else:
-                console.print(f"[red]
+                console.print(f"[red]El paciente {paciente.nombre} no tiene historial de citas.[/red]")
+
+    elif opcion == "9":  # Salir
+        console.print("[bold green]Gracias por usar el sistema de citas médicas.[/bold green]")
+        break
+
+    else:
+        console.print("[red]Opción no válida, por favor intente nuevamente.[/red]")
