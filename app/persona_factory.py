@@ -1,15 +1,12 @@
-from paciente import Paciente
 from medico import Medico
-
+from paciente import Paciente
 
 class PersonasFactory:
     @staticmethod
-    def crear_persona(tipo, identificacion, nombre, celular, especialidad=None, correo=None):
+    def crear_persona(tipo, id_persona, nombre, telefono, especialidad=None, email=None):
         if tipo.lower() == 'medico':
-            return Medico(identificacion, nombre, celular, especialidad)
-
+            return Medico(id_persona, nombre, telefono, especialidad)
         elif tipo.lower() == 'paciente':
-            return Paciente(identificacion, nombre, celular, correo)
-
+            return Paciente(id_persona, nombre, telefono, email)
         else:
             raise ValueError(f"Tipo de persona desconocido: {tipo}")

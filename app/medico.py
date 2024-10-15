@@ -1,13 +1,14 @@
 from persona import Persona
-from agenda import Agenda
-
 
 class Medico(Persona):
-    def __init__(self, identificacion, nombre, celular, especialidad):
-        super().__init__(identificacion, nombre, celular)
+    def __init__(self, id_persona, nombre, telefono, especialidad):
+        super().__init__(id_persona, nombre, telefono)
         self.especialidad = especialidad
-        self.agenda = Agenda()
+        self.lista_citas = []
 
-    def verificar_disponibilidad(self, fecha):
-        # Verifica si tiene citas pendientes en la fecha dada
-        return fecha not in self.agenda.citas_pendientes
+    def es_disponible(self, fecha):
+        # Lógica para verificar disponibilidad
+        return True
+
+    def agregar_cita(self, cita):
+        self.lista_citas.append(cita)
